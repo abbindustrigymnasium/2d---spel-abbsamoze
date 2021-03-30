@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour{
     public Rigidbody2D gameobject;
     public int playerspeed = 10;
-    public bool facingright = true;
+    private bool facingright = true;
     public int playerJumpPower = 1250;
-    public float moveX;
+    private float moveX;
     // Start is called before the first frame update
     void Start()
     {   
@@ -23,7 +23,9 @@ public class PlayerMovement : MonoBehaviour{
     void PlayerMove(){
         //Controls
         moveX = Input.GetAxisRaw("Horizontal"); 
-
+        if (Input.GetButtonDown("Jump")){
+            Jump();
+        }
         //Animations 
 
         //Player direction
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour{
 
     void Jump(){
         //Jump code
+        GetComponent<Rigidbody2D>().AddForce (Vector2.up * playerJumpPower);
     }
 
     void FlipPlayer(){
