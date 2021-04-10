@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour{
     private bool facingright = true;
     public int playerJumpPower = 1250;
     private float moveX;
+    public bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {   
@@ -49,5 +50,12 @@ public class PlayerMovement : MonoBehaviour{
         Vector2 localScale = gameObject.transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+
+    void OnCollisonEnter2D (Collision2D col){
+        Debug.Log("Player has collided with" + col.collider.name);
+        if (col.gameObject.tag == "ground") {
+            isGrounded = true;
+        }
     }
 };
