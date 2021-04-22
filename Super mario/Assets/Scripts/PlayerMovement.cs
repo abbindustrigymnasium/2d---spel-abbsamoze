@@ -8,11 +8,18 @@ public class PlayerMovement : MonoBehaviour{
     private bool facingright = true;
     public int playerJumpPower = 1250;
     private float moveX;
-    public bool isGrounded;
+
+    public LayerMask ground;
+
+    public Transform feet;
+    public bool isGrounded = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {   
-        
+        isGrounded = false;
     }
 
     // Update is called once per frame
@@ -24,7 +31,8 @@ public class PlayerMovement : MonoBehaviour{
     void PlayerMove(){
         //Controls
         moveX = Input.GetAxisRaw("Horizontal"); 
-        if (Input.GetButtonDown("Jump")){
+        Debug.Log(isGrounded);
+        if (Input.GetButtonDown("Jump") && isGrounded == true){
             Jump();
         }
         //Animations 
@@ -52,10 +60,29 @@ public class PlayerMovement : MonoBehaviour{
         transform.localScale = localScale;
     }
 
-    void OnCollisonEnter2D (Collision2D col){
-        Debug.Log("Player has collided with" + col.collider.name);
-        if (col.gameObject.tag == "ground") {
+//     public bool isGrounded() {
+//       Collider2D groundcheck = Physics2D.OverlapCircle(feet.position, 0.5f, ground);
+//       Debug.Log(groundcheck.gameObject);
+//       if (groundcheck.gameObject != null){
+//           return true;
+//       }
+
+//       return false;
+//   }
+
+    void OnCollisionEnter2D(Collision2D hit)
+    {
+        Debug.Log("OnCollisionEnter");
+        Debug.Log(isGrounded);
+        if (hit.gameObject.CompareTag ("ground")) {
             isGrounded = true;
         }
     }
+ 
+    void OnCollisionExit2D(Collision2D hit)
+    {
+        Debug.Log("OnCollisionExit");
+        isGrounded = false;
+    }
+
 };
