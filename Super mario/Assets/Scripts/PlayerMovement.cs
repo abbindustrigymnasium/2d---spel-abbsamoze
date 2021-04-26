@@ -72,8 +72,6 @@ public class PlayerMovement : MonoBehaviour{
 
     void OnCollisionEnter2D(Collision2D hit)
     {
-        Debug.Log("OnCollisionEnter");
-        Debug.Log(isGrounded);
         if (hit.gameObject.CompareTag ("ground")) {
             isGrounded = true;
         }
@@ -81,7 +79,6 @@ public class PlayerMovement : MonoBehaviour{
  
     void OnCollisionExit2D(Collision2D hit)
     {
-        Debug.Log("OnCollisionExit");
         isGrounded = false;
     }
 
