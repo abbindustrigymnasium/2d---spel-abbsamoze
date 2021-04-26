@@ -19,8 +19,11 @@ public class enemyMove : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast (transform.position, new Vector2 (XMoveDirection, 0));
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (XMoveDirection, 0) * enemySpeed;
-        if (hit.distance < 0.9f) {
+        if (hit.distance < 0.4f) {
             flip(); 
+            if (hit.collider.tag == "Player") {
+                Destroy (hit.collider.gameObject);
+            }
         }
     }
 

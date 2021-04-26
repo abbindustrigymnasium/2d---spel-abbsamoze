@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour{
     void Update() 
     {
         PlayerMove();
+        PlayerRaycast();
     }
     
     void PlayerMove(){
@@ -82,4 +83,20 @@ public class PlayerMovement : MonoBehaviour{
         isGrounded = false;
     }
 
-};
+    void PlayerRaycast () {
+        RaycastHit2D rayup = Physics2D.Raycast (transform.position, Vector2.up);
+        if (rayup.collider != null && rayup.distance < 0.9f && rayup.collider.tag == "PowerUp") {
+            Destroy (rayup.collider.gameObject);
+
+        }
+        RaycastHit2D raydown = Physics2D.Raycast (transform.position, Vector2.down);
+        if (raydown.collider != null && raydown.distance < 0.9f && raydown.collider.tag == "Enemy") {
+            GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 100);
+            raydown.collider.gameObject.gameObject.GetComponent<Rigidbody2D> ().freezeRotation = false;
+            raydown.collider.gameObject.gameObject.GetComponent<Rigidbody2D> ().gravityScale = 2;
+            raydown.collider.gameObject.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
+            raydown.collider.gameObject.gameObject.GetComponent<enemyMove> ().enabled = false;
+        }
+    }
+
+}
