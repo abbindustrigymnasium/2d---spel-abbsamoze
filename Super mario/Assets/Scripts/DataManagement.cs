@@ -19,11 +19,28 @@ public class DataManagement : MonoBehaviour {
     }
 
     public void SaveData () {
-        
+        BinaryFormatter Binform = new BinaryFormatter (); //skapa bin formatering
+        FileStream file = File.Create(Application.persistentDataPath + "/gameInfo.dat"); //skapa fil
+        gameData data = new gameData(); //skapar container för data
+        data.highScore = highScore;
+        Binform.Serialize (file, data);
+        file.Close();
     }
 
     public void LoadData() {
-
+        if (File.Exists (Application.persistentDataPath + "/gameInfo.dat")) {
+            BinaryFormatter BinForm = new BinaryFormatter ();
+            FileStream file = File.Open(Application.persistentDataPath + "/gameInfo.dat", FileMode.Open);
+            gameData data = (gameData)BinForm.Deserialize (file);
+            file.Close();
+            highScore = data.highScore;
+        }
     }
+
+}
+
+[Serializable]
+class gameData {
+public int highScore;
 
 }

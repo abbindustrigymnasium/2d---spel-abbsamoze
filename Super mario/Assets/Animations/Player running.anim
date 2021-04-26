@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mario
+  m_Name: Player running
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 707eecc1051517548aceb000110d5102, type: 3}
+      value: {fileID: 21300000, guid: 71de9f41e3cae6942b23e562040c8f84, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: d34031ab0167139409bba3dcd5701cd8, type: 3}
+      value: {fileID: 21300000, guid: ef5f7dce6a50d6d48b62d83c70b43c41, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -42,8 +42,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 707eecc1051517548aceb000110d5102, type: 3}
-    - {fileID: 21300000, guid: d34031ab0167139409bba3dcd5701cd8, type: 3}
+    - {fileID: 21300000, guid: 71de9f41e3cae6942b23e562040c8f84, type: 3}
+    - {fileID: 21300000, guid: ef5f7dce6a50d6d48b62d83c70b43c41, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

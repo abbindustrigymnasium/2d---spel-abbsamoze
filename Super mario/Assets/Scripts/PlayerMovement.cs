@@ -38,6 +38,12 @@ public class PlayerMovement : MonoBehaviour{
         }
         //Animations 
 
+        if (moveX != 0) {
+            GetComponent<Animator>().SetBool ("IsRunning", true);
+        } else {
+            GetComponent<Animator>().SetBool ("IsRunning", false);
+        }
+
         //Player direction
         if (moveX < 0.0f && facingright == false) {
             FlipPlayer();
@@ -60,16 +66,6 @@ public class PlayerMovement : MonoBehaviour{
         localScale.x *= -1;
         transform.localScale = localScale;
     }
-
-//     public bool isGrounded() {
-//       Collider2D groundcheck = Physics2D.OverlapCircle(feet.position, 0.5f, ground);
-//       Debug.Log(groundcheck.gameObject);
-//       if (groundcheck.gameObject != null){
-//           return true;
-//       }
-
-//       return false;
-//   }
 
     void OnCollisionEnter2D(Collision2D hit)
     {
