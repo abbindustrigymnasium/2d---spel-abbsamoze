@@ -14,6 +14,12 @@ public class PlayerMovement : MonoBehaviour{
     public Transform feet;
     public bool isGrounded = false;
 
+    public AudioSource jumpSound;
+
+
+
+
+
 
 
     // Start is called before the first frame update
@@ -58,6 +64,8 @@ public class PlayerMovement : MonoBehaviour{
     void Jump(){
         //Jump code
         GetComponent<Rigidbody2D>().AddForce (Vector2.up * playerJumpPower);
+        jumpSound.Play();
+
     }
 
     void FlipPlayer(){
@@ -82,9 +90,9 @@ public class PlayerMovement : MonoBehaviour{
     void PlayerRaycast () {
         RaycastHit2D rayup = Physics2D.Raycast (transform.position, Vector2.up);
         if (rayup.collider != null && rayup.distance < 0.9f && rayup.collider.tag == "PowerUp") {
-            Destroy (rayup.collider.gameObject);
-
+            Destroy(rayup.collider.gameObject);
         }
+
         RaycastHit2D raydown = Physics2D.Raycast (transform.position, Vector2.down);
         if (raydown.collider != null && raydown.distance < 0.9f && raydown.collider.tag == "Enemy") {
             GetComponent<Rigidbody2D> ().AddForce (Vector2.up * 100);
