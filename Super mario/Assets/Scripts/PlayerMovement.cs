@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour{
     void PlayerMove(){
         //Controls
         moveX = Input.GetAxisRaw("Horizontal"); 
-        Debug.Log(isGrounded);
         if (Input.GetButtonDown("Jump") && isGrounded == true){
             Jump();
         }
