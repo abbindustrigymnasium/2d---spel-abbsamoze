@@ -23,7 +23,7 @@ public class Player_Score : MonoBehaviour
         timeLeftUI.gameObject.GetComponent<Text>().text = ("Time Left: " + (int)timeLeft);
         playerScoreUI.gameObject.GetComponent<Text>().text = ("Score: " + (int)playerScore);
         if(timeLeft < 0.1f) {
-            SceneManager.LoadScene ("SampleScene");
+            SceneManager.LoadScene ("RestartScene");
         }
     }
 
@@ -33,7 +33,7 @@ public class Player_Score : MonoBehaviour
         
         }
         if (trig.gameObject.name == "coin") {
-            playerScore = playerScore += 10;
+            playerScore = playerScore += 30;
             Destroy (trig.gameObject);
         }
     }
@@ -42,5 +42,7 @@ public class Player_Score : MonoBehaviour
         playerScore = playerScore + (int)(timeLeft * 10);
         DataManagement.dataManagement.highScore = playerScore + (int)(timeLeft * 10);
         DataManagement.dataManagement.SaveData();
+        SceneManager.LoadScene("NextLevelScene");
     }
+    
 }

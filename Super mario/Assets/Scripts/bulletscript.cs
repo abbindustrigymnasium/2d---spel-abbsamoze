@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class bulletscript : MonoBehaviour
 {
@@ -14,14 +13,18 @@ public class bulletscript : MonoBehaviour
         rb.velocity = transform.right * bulletspeed;
     }
 
-    private IEnumerator kill()
+    private void kill()
     {
-        yield return new WaitForSeconds(2);
-        Destroy(gameObject);
+      Destroy(gameObject);
+        
     }
     
-  private void OnCollisionEnter2D(Collision2D collision)
+  //private void OnCollisionEnter2D(Collision2D collision)
+  void OnCollisionEnter2D(Collision2D hit)
     {
-        StartCoroutine("kill");
+        if (hit.gameObject.CompareTag ("enemy")) {
+             StartCoroutine("kill");
+        }
     }
+    
 }

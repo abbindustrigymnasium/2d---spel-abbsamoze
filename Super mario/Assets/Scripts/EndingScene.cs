@@ -7,6 +7,7 @@ public class EndingScene : MonoBehaviour
 
     public Rigidbody2D gameobject;
     public PlayableDirector director;
+    public AudioSource EndSound;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -24,5 +25,7 @@ public class EndingScene : MonoBehaviour
     {
         if(hit.gameObject.tag == ("Player"))
        director.Play();
+       EndSound.Play();
+
     }
 }

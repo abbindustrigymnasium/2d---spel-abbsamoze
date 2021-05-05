@@ -5,19 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour{
     public Rigidbody2D gameobject;
     public int playerspeed = 10;
-    private bool facingright = true;
+    public bool facingright = true;
     public int playerJumpPower = 1250;
     private float moveX;
 
     public LayerMask ground;
 
     public Transform feet;
-    public bool isGrounded = false;
 
     public AudioSource jumpSound;
-
-
-
 
 
 
@@ -25,7 +21,6 @@ public class PlayerMovement : MonoBehaviour{
     // Start is called before the first frame update
     void Start()
     {   
-        isGrounded = false;
     }
 
     // Update is called once per frame
@@ -38,7 +33,7 @@ public class PlayerMovement : MonoBehaviour{
     void PlayerMove(){
         //Controls
         moveX = Input.GetAxisRaw("Horizontal"); 
-        if (Input.GetButtonDown("Jump") && isGrounded == true){
+        if (Input.GetButtonDown("Jump") && IsGrounded()){
             Jump();
         }
         //Animations 
@@ -50,9 +45,9 @@ public class PlayerMovement : MonoBehaviour{
         }
 
         //Player direction
-        if (moveX < 0.0f && facingright == false) {
+        if (moveX > 0.0f && facingright == false) {
             FlipPlayer();
-        } else if (moveX > 0.0f && facingright == true) {
+        } else if (moveX < 0.0f && facingright == true) {
             FlipPlayer();
         };
         //Physics
@@ -74,22 +69,26 @@ public class PlayerMovement : MonoBehaviour{
         transform.localScale = localScale;
     }
 
-    void OnCollisionEnter2D(Collision2D hit)
+    public bool IsGrounded()
     {
-        if (hit.gameObject.CompareTag ("ground")) {
-            isGrounded = true;
+        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, ground);
+
+ 
+
+        if (groundCheck != null)
+        {
+            return true;
         }
+        return false;
     }
  
-    void OnCollisionExit2D(Collision2D hit)
-    {
-        isGrounded = false;
-    }
+    
 
     void PlayerRaycast () {
         RaycastHit2D rayup = Physics2D.Raycast (transform.position, Vector2.up);
         if (rayup.collider != null && rayup.distance < 0.9f && rayup.collider.tag == "PowerUp") {
             Destroy(rayup.collider.gameObject);
+            
         }
 
         RaycastHit2D raydown = Physics2D.Raycast (transform.position, Vector2.down);

@@ -6,16 +6,20 @@ using UnityEngine.SceneManagement;
 public class Player_Health : MonoBehaviour
 {
     public int health;
+    public AudioSource StartSound;
+    public AudioSource DieSound;
     
+   void Start(){
+       StartSound.Play();
+
+   }
+   
     void Update()
     {
-        if (gameObject.transform.position.y <-7){
-            Die();
-        };
 
-    }
+        if (gameObject.transform.position.y <-100){
+            SceneManager.LoadScene("RestartScene");        
+            }
 
-    void Die () {
-       SceneManager.LoadScene ("SampleScene");
     }
 }   

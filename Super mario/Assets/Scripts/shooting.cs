@@ -27,7 +27,7 @@ public class shooting : MonoBehaviour
 
     void shoot()
     {
-        float angle = true ? 0f : 180f;
+        float angle = pm.facingright ? 0f : 180f;
         Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0f, 0f, angle)));
     }
 
