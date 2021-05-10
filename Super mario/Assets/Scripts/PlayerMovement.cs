@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour{
 
 
 
-
     // Start is called before the first frame update
     void Start()
     {   
@@ -88,8 +87,8 @@ public class PlayerMovement : MonoBehaviour{
         RaycastHit2D rayup = Physics2D.Raycast (transform.position, Vector2.up);
         if (rayup.collider != null && rayup.distance < 0.9f && rayup.collider.tag == "PowerUp") {
             Destroy(rayup.collider.gameObject);
-            
         }
+    
 
         RaycastHit2D raydown = Physics2D.Raycast (transform.position, Vector2.down);
         if (raydown.collider != null && raydown.distance < 0.9f && raydown.collider.tag == "Enemy") {
@@ -100,5 +99,6 @@ public class PlayerMovement : MonoBehaviour{
             raydown.collider.gameObject.gameObject.GetComponent<enemyMove> ().enabled = false;
         }
     }
+
 
 }
