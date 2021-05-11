@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class Player_Health : MonoBehaviour
 {
     public int health;
-    public AudioSource StartSound;
+    
     public AudioSource DieSound;
+    public AudioSource sus;
     
    void Start(){
-       StartSound.Play();
-
+       sus.Play();
    }
    
     void Update()

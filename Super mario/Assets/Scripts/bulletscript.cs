@@ -15,7 +15,7 @@ public class bulletscript : MonoBehaviour
 
     private void kill()
     {
-      Destroy(gameObject);
+      Destroy(rb);
         
     }
     

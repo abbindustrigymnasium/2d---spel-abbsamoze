@@ -7,14 +7,19 @@ public class PlayerMovement : MonoBehaviour{
     public int playerspeed = 10;
     public bool facingright = true;
     public int playerJumpPower = 1250;
-    private float moveX;
+    private float moveX; 
 
     public LayerMask ground;
 
     public Transform feet;
 
     public AudioSource jumpSound;
+    public AudioSource StartSound;
+    public Transform flower;
+    public Transform iceBlock;
+    public Animator fire;
 
+    public Collider2D kir;
 
 
     // Start is called before the first frame update
@@ -87,8 +92,11 @@ public class PlayerMovement : MonoBehaviour{
         RaycastHit2D rayup = Physics2D.Raycast (transform.position, Vector2.up);
         if (rayup.collider != null && rayup.distance < 0.9f && rayup.collider.tag == "PowerUp") {
             Destroy(rayup.collider.gameObject);
+           
+            Instantiate(flower, new Vector3(2.0F ,2f, 10f), Quaternion.identity);
+            Instantiate(iceBlock, new Vector3(2.0F ,1f, 7f), Quaternion.identity);
+
         }
-    
 
         RaycastHit2D raydown = Physics2D.Raycast (transform.position, Vector2.down);
         if (raydown.collider != null && raydown.distance < 0.9f && raydown.collider.tag == "Enemy") {
@@ -97,6 +105,19 @@ public class PlayerMovement : MonoBehaviour{
             raydown.collider.gameObject.gameObject.GetComponent<Rigidbody2D> ().gravityScale = 2;
             raydown.collider.gameObject.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
             raydown.collider.gameObject.gameObject.GetComponent<enemyMove> ().enabled = false;
+        }
+    }
+
+    void OnTriggerEnter2D (Collider2D trig) {
+
+            if (trig.gameObject.tag == "Flower") {
+            StartSound.Play();
+            Destroy (trig.gameObject); 
+            fire.SetBool("IsFire", true);
+            kir.enabled = true;
+
+
+            
         }
     }
 

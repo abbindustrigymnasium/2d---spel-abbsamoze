@@ -35,6 +35,8 @@ public class Player_Score : MonoBehaviour
         if (trig.gameObject.name == "coin") {
             playerScore = playerScore += 30;
             Destroy (trig.gameObject);
+
+            
         }
     }
 
